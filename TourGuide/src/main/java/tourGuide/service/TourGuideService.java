@@ -209,4 +209,15 @@ public class TourGuideService {
     }
 
 
+    /**
+     *
+     * @return All last location of users with userId in key and location in value
+     */
+    public Map<UUID, Location> getMappingLocationUser() {
+        return internalUserMap.values()
+                .stream()
+                .filter(user -> user.getLastVisitedLocation() != null)
+                .collect(Collectors.toMap(User::getUserId,user -> user.getLastVisitedLocation().location));
+
+    }
 }
