@@ -1,7 +1,12 @@
 package tourGuide.service;
 
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import gpsUtil.GpsUtil;
@@ -13,6 +18,7 @@ import tourGuide.user.User;
 import tourGuide.user.UserReward;
 
 @Service
+@Slf4j
 public class RewardsService {
     private static final double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
 
@@ -36,31 +42,39 @@ public class RewardsService {
 		proximityBuffer = defaultProximityBuffer;
 	}
 	
-	public void calculateRewards(User user) {
+	public void calculateRewards(User user) throws ExecutionException, InterruptedException {
 		List<VisitedLocation> userLocations = user.getVisitedLocations();
 		List<Attraction> attractions = gpsUtil.getAttractions();
-		
+
 		for(VisitedLocation visitedLocation : userLocations) {
 			for(Attraction attraction : attractions) {
 				if(user.getUserRewards().stream().filter(r -> r.attraction.attractionName.equals(attraction.attractionName)).count() == 0) {
 					if(nearAttraction(visitedLocation, attraction)) {
-						user.addUserReward(new UserReward(visitedLocation, attraction, getRewardPoints(attraction, user)));
+						user.addUserReward(new UserReward(visitedLocation, attraction, getRewardPoints(attraction, user).get()));
 					}
 				}
 			}
 		}
 	}
-	
+
 	public boolean isWithinAttractionProximity(Attraction attraction, Location location) {
-		return getDistance(attraction, location) > attractionProximityRange ? false : true;
+
+
+
+			return getDistance(attraction, location) > attractionProximityRange ? false : true;
 	}
 	
 	private boolean nearAttraction(VisitedLocation visitedLocation, Attraction attraction) {
 		return getDistance(attraction, visitedLocation.location) > proximityBuffer ? false : true;
 	}
-	
-	private int getRewardPoints(Attraction attraction, User user) {
-		return rewardsCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());
+
+	@Async
+	public CompletableFuture<Integer> getRewardPoints(UUID attractionId, UUID userId) {
+		return CompletableFuture.completedFuture(rewardsCentral.getAttractionRewardPoints(attractionId, userId));
+	}
+	@Async
+	public CompletableFuture<Integer> getRewardPoints(Attraction attraction, User user) {
+		return getRewardPoints(attraction.attractionId, user.getUserId());
 	}
 	
 	public double getDistance(Location loc1, Location loc2) {
