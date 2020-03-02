@@ -13,17 +13,19 @@ import java.util.concurrent.Executor;
 public class AsyncConfiguration {
 
     @Value("${tour.guide.concurrency.executor.core.pool.size}")
-    private int coreSize;
+    private String coreSize;
 
     @Value("${tour.guide.concurrency.executor.max.pool.size}")
-    private int maxCoreSize;
+    private String maxCoreSize;
 
     @Bean
     public Executor taskExecutor()
     {
         final ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(coreSize);
-        executor.setMaxPoolSize(maxCoreSize);
+
+        executor.setCorePoolSize(10);
+        executor.setMaxPoolSize(100);
+        executor.setThreadNamePrefix("TourGuide-");
         executor.initialize();
 
         return executor;

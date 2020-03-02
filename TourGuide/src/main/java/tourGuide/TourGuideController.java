@@ -3,10 +3,12 @@ package tourGuide;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 import gpsUtil.location.Location;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,10 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jsoniter.output.JsonStream;
 
-import gpsUtil.location.VisitedLocation;
 import tourGuide.entity.ProposalAttraction;
 import tourGuide.service.TourGuideService;
-import tourGuide.user.User;
 import tripPricer.Provider;
 
 import static org.springframework.http.MediaType.*;
@@ -34,13 +34,13 @@ public class TourGuideController {
         return "Greetings from TourGuide!";
     }
     
-    @GetMapping("/getLocation")
-    public String getLocation(@RequestParam String userName) {
-    	VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));
-		return JsonStream.serialize(visitedLocation.location);
+    @GetMapping(value = "/getLocation",produces = APPLICATION_JSON_VALUE)
+    @Async
+    public CompletableFuture<Location> getLocation(@RequestParam String userName) {
+		return tourGuideService.getUserLocation(userName);
     }
 
-    @GetMapping(value = "/getNearbyAttractions",produces = {APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/getNearbyAttractions",produces = APPLICATION_JSON_VALUE)
     public ProposalAttraction getNearbyAttractions(@RequestParam String userName) {
         logger.info("Request GET : /getNearbyAttractions : " + userName );
 
@@ -49,23 +49,19 @@ public class TourGuideController {
     
     @RequestMapping("/getRewards") 
     public String getRewards(@RequestParam String userName) {
-    	return JsonStream.serialize(tourGuideService.getUserRewards(getUser(userName)));
+    	return JsonStream.serialize(tourGuideService.getUserRewards(userName));
     }
     
-    @GetMapping(value = "/getAllCurrentLocations",produces = {APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/getAllCurrentLocations",produces = APPLICATION_JSON_VALUE)
     public Map<UUID, Location> getAllCurrentLocations() {
         return tourGuideService.getMappingLocationUser();
     }
     
     @GetMapping("/getTripDeals")
     public String getTripDeals(@RequestParam String userName) {
-    	List<Provider> providers = tourGuideService.getTripDeals(getUser(userName));
+    	List<Provider> providers = tourGuideService.getTripDeals(userName);
     	return JsonStream.serialize(providers);
     }
 
-    private User getUser(String userName) {
-    	return tourGuideService.getUser(userName);
-    }
-   
 
 }

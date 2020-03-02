@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -41,8 +44,13 @@ public class RewardsService {
 	public void setDefaultProximityBuffer() {
 		proximityBuffer = defaultProximityBuffer;
 	}
-	
+
+	private AtomicInteger compteur = new AtomicInteger(0);
+
+	@Async
 	public void calculateRewards(User user) throws ExecutionException, InterruptedException {
+
+		logger.debug("Call calculateRewards" + compteur.incrementAndGet() +" THREAD : " + Thread.currentThread().getName());
 		List<VisitedLocation> userLocations = user.getVisitedLocations();
 		List<Attraction> attractions = gpsUtil.getAttractions();
 
@@ -55,6 +63,7 @@ public class RewardsService {
 				}
 			}
 		}
+
 	}
 
 	public boolean isWithinAttractionProximity(Attraction attraction, Location location) {

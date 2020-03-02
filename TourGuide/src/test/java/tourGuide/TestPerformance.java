@@ -17,15 +17,26 @@ import org.junit.Test;
 import gpsUtil.GpsUtil;
 import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import rewardCentral.RewardCentral;
+import tourGuide.configuration.AsyncConfiguration;
 import tourGuide.helper.InternalTestHelper;
 import tourGuide.service.RewardsService;
 import tourGuide.service.TourGuideService;
+import tourGuide.tracker.Tracker;
 import tourGuide.user.User;
+import tripPricer.TripPricer;
 
 @Slf4j
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TourGuideService.class,GpsUtil.class,RewardsService.class, TripPricer.class, Tracker.class,RewardCentral.class, AsyncConfiguration.class}
+)
 public class TestPerformance {
-
+    @Autowired
+    private TourGuideService tourGuideService;
     /*
      * A note on performance improvements:
      *
@@ -69,6 +80,8 @@ public class TestPerformance {
     }
 
 
+
+
     @Test
     public void highVolumeGetRewards() {
         GpsUtil gpsUtil = new GpsUtil();
@@ -78,7 +91,7 @@ public class TestPerformance {
         InternalTestHelper.setInternalUserNumber(10);
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
-        TourGuideService tourGuideService = new TourGuideService(gpsUtil, rewardsService);
+       // TourGuideService tourGuideService = new TourGuideService(gpsUtil, rewardsService);
 
         Attraction attraction = gpsUtil.getAttractions().get(0);
         List<User> allUsers = tourGuideService.getAllUsers();

@@ -33,16 +33,17 @@ public class TourGuideService {
     private final RewardsService rewardsService;
     private final TripPricer tripPricer = new TripPricer();
     public final Tracker tracker;
-    boolean testMode = true;
+
+    private Boolean inMemoryMode = true;
 
     @Value("${attractions.proximity.max}")
-    private long maxAttractions;
+    private String maxAttractions;
 
     public TourGuideService(GpsUtil gpsUtil, RewardsService rewardsService) {
         this.gpsUtil = gpsUtil;
         this.rewardsService = rewardsService;
 
-        if (testMode) {
+        if (inMemoryMode) {
             logger.info("TestMode enabled");
             logger.debug("Initializing users");
             initializeInternalUsers();
@@ -52,40 +53,61 @@ public class TourGuideService {
         addShutDownHook();
     }
 
-    public List<UserReward> getUserRewards(User user) {
-        return user.getUserRewards();
+    public List<UserReward> getUserRewards(String userName) {
+        return getUser(userName).getUserRewards();
     }
 
-    public VisitedLocation getUserLocation(User user) {
-        VisitedLocation visitedLocation = (user.getVisitedLocations().size() > 0) ?
-                user.getLastVisitedLocation() :
-                trackUserLocation(user);
-        return visitedLocation;
+    @Async
+    public CompletableFuture<Location> getUserLocation(User user) {
+
+        return CompletableFuture.completedFuture(user)
+                .thenApply(userAsync -> Optional.of(userAsync)
+                        .map(User::getLastVisitedLocation)
+                        .orElse(trackUserLocation(userAsync)))
+                .thenApply(visitedLocation -> visitedLocation.location);
+
+    }
+
+    @Async
+    public CompletableFuture<Location> getUserLocation(String userName) {
+
+        return CompletableFuture.completedFuture(getUser(userName))
+                .thenApply(user -> Optional.of(user)
+                        .map(User::getLastVisitedLocation)
+                        .orElse(trackUserLocation(user)))
+                .thenApply(visitedLocation -> visitedLocation.location);
+
     }
 
     public ProposalAttraction getBestPropositionForUser(String userName) {
-        //Get User and his location
-        User user = getUser(userName);
-        VisitedLocation visitedLocation = getUserLocation(user);
-        //Calculate 5 first locations
-        List<RewardAttractionToUser> rewards = getNearByAttractions(visitedLocation);
-        long start = System.currentTimeMillis();
-        rewards
-                .forEach(rewardAttractionToUser -> {
-                    try {
-                        rewardAttractionToUser
-                                .setRewardPoints(rewardsService.getRewardPoints(rewardAttractionToUser.getAttractionId(), user.getUserId()).get());
-                    } catch (InterruptedException | ExecutionException e) {
-                       logger.warn("Impossible to calculate reward for : " + rewardAttractionToUser.toString(),e);
-                    }
-                });
-        logger.debug("Calc all reward in : " + (System.currentTimeMillis() - start));
-        return ProposalAttraction.builder()
-                .attractionToUsers(rewards)
-                .userLatitude(visitedLocation.location.latitude)
-                .userLongitude(visitedLocation.location.longitude)
-                .build();
 
+        try {
+            //Get User and his location
+            User user = getUser(userName);
+            Location location = getUserLocation(user).get();
+
+            //Calculate 5 first locations
+            List<RewardAttractionToUser> rewards = getNearByAttractions(location);
+            long start = System.currentTimeMillis();
+            rewards
+                    .forEach(rewardAttractionToUser -> {
+                        try {
+                            rewardAttractionToUser
+                                    .setRewardPoints(rewardsService.getRewardPoints(rewardAttractionToUser.getAttractionId(), user.getUserId()).get());
+                        } catch (InterruptedException | ExecutionException e) {
+                            logger.warn("Impossible to calculate reward for : " + rewardAttractionToUser.toString(), e);
+                        }
+                    });
+            logger.debug("Calc all reward in : " + (System.currentTimeMillis() - start));
+            return ProposalAttraction.builder()
+                    .attractionToUsers(rewards)
+                    .userLatitude(location.latitude)
+                    .userLongitude(location.longitude)
+                    .build();
+        } catch (InterruptedException | ExecutionException e) {
+            logger.warn("Impossible to get location of the User", e);
+        }
+        return null;
     }
 
     public User getUser(String userName) {
@@ -102,8 +124,9 @@ public class TourGuideService {
         }
     }
 
-    public List<Provider> getTripDeals(User user) {
-        int cumulatativeRewardPoints = user.getUserRewards().stream().mapToInt(i -> i.getRewardPoints()).sum();
+    public List<Provider> getTripDeals(String userName) {
+        User user = getUser(userName);
+        int cumulatativeRewardPoints = user.getUserRewards().stream().mapToInt(UserReward::getRewardPoints).sum();
         List<Provider> providers = tripPricer.getPrice(tripPricerApiKey, user.getUserId(), user.getUserPreferences().getNumberOfAdults(),
                 user.getUserPreferences().getNumberOfChildren(), user.getUserPreferences().getTripDuration(), cumulatativeRewardPoints);
         user.setTripDeals(providers);
@@ -116,42 +139,42 @@ public class TourGuideService {
         try {
             rewardsService.calculateRewards(user);
         } catch (ExecutionException | InterruptedException e) {
-           logger.warn("Impossible to track user : " + user,e);
+            logger.warn("Impossible to track user : " + user, e);
         }
         return visitedLocation;
     }
 
 
-    public List<RewardAttractionToUser> getNearByAttractions(VisitedLocation visitedLocation) {
+    public List<RewardAttractionToUser> getNearByAttractions(Location visitedLocation) {
 
         return gpsUtil.getAttractions()
                 .parallelStream()
                 .map(attraction -> {
                     try {
                         long start = System.currentTimeMillis();
-                        RewardAttractionToUser reward= calcRewardAttractionToUser(attraction, visitedLocation).get();
-                        logger.debug("Reward calc in : " + (System.currentTimeMillis() -start) +" ms" );
+                        RewardAttractionToUser reward = calcRewardAttractionToUser(attraction, visitedLocation).get();
+                        logger.debug("Reward calc in : " + (System.currentTimeMillis() - start) + " ms");
                         return reward;
 
                     } catch (InterruptedException | ExecutionException e) {
-                        logger.warn("Impossible to create reward for : " + attraction.toString(),e);
+                        logger.warn("Impossible to create reward for : " + attraction.toString(), e);
                         return null;
                     }
                 }).sorted()
-                .limit(maxAttractions)
+                .limit(Long.parseLong(maxAttractions))
                 .collect(Collectors.toList());
 
     }
 
     @Async
-    public CompletableFuture<RewardAttractionToUser> calcRewardAttractionToUser(Attraction attraction, VisitedLocation visitedLocation) {
+    public CompletableFuture<RewardAttractionToUser> calcRewardAttractionToUser(Attraction attraction, Location location) {
         return CompletableFuture.completedFuture(RewardAttractionToUser
                 .builder()
                 .attractionId(attraction.attractionId)
                 .attractionLatitude(attraction.latitude)
                 .attractionLongitude(attraction.longitude)
                 .attractionName(attraction.attractionName)
-                .distance(rewardsService.getDistance(attraction, visitedLocation.location))
+                .distance(rewardsService.getDistance(attraction, location))
                 .build());
     }
 
@@ -210,14 +233,13 @@ public class TourGuideService {
 
 
     /**
-     *
      * @return All last location of users with userId in key and location in value
      */
     public Map<UUID, Location> getMappingLocationUser() {
         return internalUserMap.values()
                 .stream()
                 .filter(user -> user.getLastVisitedLocation() != null)
-                .collect(Collectors.toMap(User::getUserId,user -> user.getLastVisitedLocation().location));
+                .collect(Collectors.toMap(User::getUserId, user -> user.getLastVisitedLocation().location));
 
     }
 }
