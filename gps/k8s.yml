@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gps-deployment
+  labels:
+    app: gps
+spec:
+  replicas: 20
+  selector:
+    matchLabels:
+      app: gps
+  template:
+    metadata:
+      labels:
+        app: gps
+    spec:
+      containers:
+        - name: gps
+          image: tourguide:gps
+          ports:
+            - containerPort: 8081

@@ -1,0 +1,6 @@
+
+kubectl apply -f k8s.yml
+
+kubectl expose deployment gps-deployment --type=LoadBalancer --name=gps
+
+kubectl delete gps-deployment --all

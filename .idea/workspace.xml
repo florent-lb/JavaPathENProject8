@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="262b7c3c-669d-4f12-a80e-3b92155ba360" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TourGuide/Kube cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TourGuide/logs/spring-boot-logger.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/client/ClientConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/client/ClientGPS.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/configuration/PropertiesService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/entity/Attraction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/entity/Location.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/entity/VisitedLocation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TourGuide/src/test/resources/logback-test.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edge/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edge/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edge/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edge/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edge/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edge/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edge/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edge/src/main/java/tour/guide/edge/EdgeApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edge/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edge/src/test/java/tour/guide/edge/EdgeApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gps/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gps/k8s.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gps/src/main/java/tour/guide/gps/entities/Attraction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gps/src/main/java/tour/guide/gps/entities/Location.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gps/src/main/java/tour/guide/gps/entities/VisitedLocation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gps/src/main/java/tour/guide/gps/service/GpsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gps/src/main/java/tour/guide/gps/service/GpsServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gps/src/main/java/tour/guide/gps/utils/SurchargeGPGUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TourGuide/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/TourGuide/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TourGuide/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/TourGuide/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/TourGuideController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/TourGuideController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/TourGuideModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/TourGuideModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/configuration/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/configuration/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/service/RewardsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/service/RewardsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/service/TourGuideService.java" beforeDir="false" afterPath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/service/TourGuideService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/tracker/Tracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/tracker/Tracker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/user/UserReward.java" beforeDir="false" afterPath="$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/user/UserReward.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TourGuide/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/TourGuide/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TourGuide/src/test/java/tourGuide/TestPerformance.java" beforeDir="false" afterPath="$PROJECT_DIR$/TourGuide/src/test/java/tourGuide/TestPerformance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TourGuide/src/test/java/tourGuide/TestRewardsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/TourGuide/src/test/java/tourGuide/TestRewardsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TourGuide/src/test/java/tourGuide/TestTourGuideService.java" beforeDir="false" afterPath="$PROJECT_DIR$/TourGuide/src/test/java/tourGuide/TestTourGuideService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TourGuide/src/test/resources/application.properties" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/TourGuide">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/edge">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/gps">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1YkoH7QBvsKsQ9NNYJHODL6HGvT" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ExpandSpringBootJavaOptionsPanel" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/gps" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15332031" />
+    <property name="project.structure.side.proportion" value="0.3218391" />
+  </component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Gradle.TestPerformance">
+    <configuration name="TestPerformance" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/TourGuide" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;tourGuide.TestPerformance&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="EdgeApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="edge.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="tour.guide.edge.EdgeApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GpsApplication1" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="gps.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="tour.guide.gps.GpsApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <envs>
+        <env name="server.port" value="8082" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GpsApplication2" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="gps.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="tour.guide.gps.GpsApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <envs>
+        <env name="server.port" value="8083" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ToursGuideApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="TourGuide.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="tourGuide.configuration.Application" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Gradle.TestPerformance" />
+      <item itemvalue="Spring Boot.ToursGuideApplication" />
+      <item itemvalue="Spring Boot.EdgeApplication" />
+      <item itemvalue="Spring Boot.GpsApplication1" />
+      <item itemvalue="Spring Boot.GpsApplication2" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.TestPerformance" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="262b7c3c-669d-4f12-a80e-3b92155ba360" name="Default Changelist" comment="" />
+      <created>1583495862164</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583495862164</updated>
+      <workItem from="1583495864263" duration="12316000" />
+      <workItem from="1583758813502" duration="288000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="586" y="198" key="#Inspections" timestamp="1583498915207">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="586" y="198" key="#Inspections/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583498915207" />
+    <state x="703" y="227" key="#Notifications" timestamp="1583495984182">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="703" y="227" key="#Notifications/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583495984182" />
+    <state x="390" y="92" key="#Project_Structure" timestamp="1583496279230">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="390" y="92" key="#Project_Structure/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583496279230" />
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583497965305">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583497965305" />
+    <state x="689" y="303" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1583496247942">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="689" y="303" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583496247942" />
+    <state x="640" y="255" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1583758975379">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="640" y="255" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583758975379" />
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1583502122536">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583502122536" />
+    <state x="694" y="279" key="EnvironmentVariablesDialog" timestamp="1583497938128">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="694" y="279" key="EnvironmentVariablesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583497938128" />
+    <state x="740" y="213" key="FileChooserDialogImpl" timestamp="1583496266033">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="213" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583496266033" />
+    <state width="1877" height="348" key="GridCell.Tab.0.bottom" timestamp="1583508600967">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583508600967" />
+    <state width="1877" height="348" key="GridCell.Tab.0.center" timestamp="1583508600967">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583508600967" />
+    <state width="1877" height="348" key="GridCell.Tab.0.left" timestamp="1583508600967">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583508600967" />
+    <state width="1877" height="348" key="GridCell.Tab.0.right" timestamp="1583508600967">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583508600967" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1583508600968">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583508600968" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1583508600968">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583508600968" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1583508600968">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583508600968" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1583508600968">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583508600968" />
+    <state x="625" y="218" key="NewModule_or_Project.wizard" timestamp="1583496267499">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="625" y="218" key="NewModule_or_Project.wizard/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583496267499" />
+    <state x="343" y="215" key="new project wizard" timestamp="1583496032869">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="343" y="215" key="new project wizard/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1583496032869" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/TourGuide/src/main/java/tourGuide/service/TourGuideService.java</url>
+          <line>132</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

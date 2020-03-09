@@ -5,6 +5,7 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.2.4.RELEASE")
     }
+
 }
 
 apply plugin: 'java'
@@ -14,10 +15,12 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: "jacoco"
 
-
 bootJar {
     archiveFileName = "${archiveBaseName.get()}.${archiveVersion.get()}.${archiveExtension.get()}"
 
+}
+ext {
+    set('springCloudVersion', "Hoxton.SR1")
 }
 
 repositories {
@@ -25,17 +28,21 @@ repositories {
     flatDir {
         dirs 'libs'
     }
+
 }
 
 sourceCompatibility = 13
 targetCompatibility = 13
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    runtimeOnly 'org.springframework.boot:spring-boot-starter-tomcat'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    //runtimeOnly 'org.springframework.boot:spring-boot-starter-tomcat'
 
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     compileOnly("org.springframework.boot:spring-boot-devtools")
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.2.1.RELEASE'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-ribbon:2.2.1.RELEASE'
 
     compileOnly 'org.projectlombok:lombok:1.18.12'
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
@@ -46,12 +53,21 @@ dependencies {
     implementation group: 'org.javamoney', name: 'moneta', version: '1.3'
     implementation group: 'com.jsoniter', name: 'jsoniter', version: '0.9.23'
 
-    implementation(name:'gpsUtil', ext:'jar')
+   // implementation(name:'gpsUtil', ext:'jar')
     implementation(name:'RewardCentral', ext:'jar')
     implementation(name:'TripPricer', ext:'jar')
 
-    testImplementation("junit:junit")
+   // testImplementation("junit:junit")
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
     testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.2.4.RELEASE'
+
+}
+
+test {
+    useJUnitPlatform()
 }
 
 
@@ -66,6 +82,9 @@ jacocoTestReport {
         html.destination file("${buildDir}/jacocoHtml")
     }
 }
+
+
+
 
 test.finalizedBy jacocoTestReport
 check.dependsOn jacocoTestCoverageVerification
